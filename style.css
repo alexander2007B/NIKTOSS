@@ -1,0 +1,252 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #0f0f0f;
+  color: #e0e0e0;
+}
+
+/* ===== ГАЛЕРЕЯ ===== */
+.gallery {
+  padding: 20px 10px;
+}
+
+.gallery-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gallery-container img {
+  border-radius: 8px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+/* 📱 мобильная версия */
+@media (max-width: 768px) {
+  .gallery-container img {
+    width: 32%;
+    height: 120px;
+  }
+}
+
+/* 💻 десктоп */
+@media (min-width: 769px) {
+  .gallery-container img {
+    width: 30%;
+    max-width: 300px;
+    height: 300px;
+  }
+}
+
+.gallery-container img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== ЗАГОЛОВОК ===== */
+.hero-title {
+  text-align: center;
+  padding: 40px 10px;
+}
+
+.hero-title h1 {
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+/* мобилка */
+@media (max-width: 768px) {
+  .hero-title h1 {
+    font-size: 36px;
+  }
+}
+
+/* десктоп */
+@media (min-width: 769px) {
+  .hero-title h1 {
+    font-size: 80px;
+  }
+}
+
+/* ===== ТОВАРЫ ===== */
+.products-section {
+  padding: 20px 10px;
+}
+
+.products-container {
+  display: grid;
+  gap: 16px;
+}
+
+/* мобилка */
+@media (max-width: 768px) {
+  .products-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-card img {
+    height: 160px;
+  }
+}
+
+/* десктоп */
+@media (min-width: 769px) {
+  .products-container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .product-card img {
+    height: 300px;
+  }
+}
+
+.product-card {
+  background: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+}
+
+.product-card img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Галерея плавно двигается */
+.gallery-container {
+  animation: floatGallery 20s linear infinite;
+}
+
+@keyframes floatGallery {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-50px); }
+  100% { transform: translateX(0); }
+}
+
+/* Карточки — эффект дорогого hover */
+.product-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.05);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.product-card:hover::after {
+  opacity: 1;
+}
+
+/* Зум + блюр эффект */
+.product-card img {
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Заголовок анимация */
+.hero-title h1 {
+  animation: fadeTitle 1.5s ease forwards;
+}
+
+@keyframes fadeTitle {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    letter-spacing: 20px;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 3px;
+  }
+}
+
+/* ===== КАСТОМНЫЙ КУРСОР ===== */
+body {
+  cursor: none;
+}
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  z-index: 9999;
+}
+
+/* ===== BLUR ПРИ СКРОЛЛЕ ===== */
+.blur {
+  filter: blur(5px);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+/* ===== FULLSCREEN VIEW ===== */
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.viewer img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.viewer.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ===== ПЛАВНОЕ ПОЯВЛЕНИЕ (УЛУЧШЕНОЕ) ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ===== ГАЛЕРЕЯ ИНЕРЦИЯ ===== */
+.gallery-container {
+  cursor: grab;
+}
